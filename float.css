@@ -1,0 +1,31 @@
+.container_float {
+  display: flex;
+  justify-content: left;
+  padding-left: 0%;
+  padding-right: 100%;
+}
+
+/* Чуть-чуть выравниваем строки*/
+.labels > label,
+.inputs > span,
+.inputs > input {
+  display: block;
+  line-height: 100%;
+}
+.labels > label,
+.labels > p {
+  display: block;
+  line-height: 130%;
+  font-size: clamp(1px, 2vw, 2.5rem);
+}
+
+.inputs > span,
+.inputs > input {
+  font-size: clamp(1px, 1.5vw, 2.5rem);
+
+  width: 14vw;
+  max-width: 130px;
+  /* min-width: 110px; */
+}
+/* input.centered {
+    text-align: center; /* Стрела, центрированная в цель */

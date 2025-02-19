@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>По двум точкам</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" 
+    crossorigin="anonymous">
+    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" 
+    crossorigin="anonymous">
+    </script>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <link href="float.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <link href="nav-bar.css" rel="stylesheet"/>
+    
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link"  href="index.html">Вступление</a>
+            </li>
+              <a class="nav-link" href="Линейная функция.html">Стандартный вид уравнения линейной функции</a>
+            </li>
+              <a class="nav-link"  href="Общий вид уравнения прямой.html">Общий вид уравнения прямой</a>
+            </li>
+              <a class="nav-link"  href="По точке и вектору.html">По точке и вектору</a>
+            </li>
+              <a class="nav-link" href ="В отрезках.html">В отрезках</a> 
+            </li>
+              <a class="nav-link active" href="#">По двум точкам</a>
+            </li>
+              <a class="nav-link" href="Итоги.html">Итоги</a>
+            </il>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+      <div class="row" style="padding-left: 20vw; padding-right: 20vw; padding-top: 1vh;">
+        <div>
+          <canvas id="canvas"></canvas>
+          <script>
+            // Предварительно задаём размеры экрана
+document.getElementById('canvas').width = window.innerWidth / 2;
+document.getElementById('canvas').height = window.innerHeight / 2;
+          </script>
+          <script>
+            const canvas = document.getElementById('canvas');
+            var canvasPlot = document.getElementById('canvas');
+        var ctx = canvasPlot.getContext('2d');
+        canvas.width = window.innerWidth / 3;
+        canvas.height = window.innerWidth / 3;
+        var canvasPlotWidth = canvasPlot.clientWidth;
+        var canvasPlotHeight = canvasPlot.clientHeight;
+        var center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+        var delenie = window.innerWidth / 3 / 20;          
+        ctx.beginPath();
+        ctx.lineWidth = 3;
+        ctx.strokestyle = "#fc0202";
+        ctx.moveTo(0, center[1]);
+        ctx.lineTo(canvasPlotWidth, center[1]);
+        ctx.moveTo(center[0], 0);
+        ctx.lineTo(center[0], canvasPlotHeight);
+        ctx.moveTo(center[0] - 10, 10);
+        ctx.lineTo(center[0], 0);
+        ctx.moveTo(center[0] + 10, 10);
+        ctx.lineTo(center[0], 0);
+        ctx.moveTo(canvasPlotWidth - 10, center[1] - 10);
+        ctx.lineTo(canvasPlotWidth, center[1]);
+        ctx.moveTo(canvasPlotWidth - 10, center[1] + 10);
+        ctx.lineTo(canvasPlotWidth, center[1]);
+        // ctx.font = "30px";
+        for (let i = 1; i < (canvasPlotHeight) / delenie; i++) {
+            if (i * delenie != center[1]) {
+                ctx.moveTo(center[0] - delenie / 6, i * delenie);
+                ctx.lineTo(center[0] + delenie / 6, i * delenie);
+                // ctx.lineWidth = 1;
+                
+                // ctx.strokeText('1', 100, 200);
+            }
+        }
+        for (let i = 1; i < (canvasPlotWidth) / delenie; i++) {
+            if (i * delenie != center[0]) {
+                ctx.moveTo(i * delenie, center[1] - delenie / 6);
+                ctx.lineTo(i * delenie, center[1] + delenie / 6);
+            }
+        }
+        ctx.stroke();
+        /* ctx.font = "30px";
+        ctx.lineWidth = 1;
+        for (let i = 1; i < (canvasPlotHeight - 1) / delenie; i++) {
+            // if (i * delenie + 1 < center[1]) {
+                if (i * delenie + 1 == center[1] - delenie) {
+                    ctx.strokeText((center[1] - 1) / delenie - i, center[0] + 2, i * delenie + 11);
+                }
+                if  (i * delenie + 1 == center[1]) {
+                    ctx.strokeText((center[1] - 1) / delenie - i, center[0] + 2, i * delenie + 11);
+                }
+                
+                
+            }
+        
+        for (let i = 1; i < (canvasPlotWidth - 1) / delenie; i++) {
+            
+                
+                // ctx.lineTo(i * delenie + 1, center[1] + 5);
+                if (i * delenie + 1 == center[0] + delenie) {
+                    ctx.strokeText(i - (center[0] - 1) / delenie, i * delenie - 5, center[1] + 10);
+                }
+                
+            } */
+            
+        ctx.strokeText('Y', center[0] + 15, 10);
+        ctx.strokeText('X', canvasPlotWidth - 10, center[1] + 20);
+      </script>
+      <script>
+        let ctandart_znamenatel_1 = 4;
+        let ctandart_znamenatel_2 = 4;
+        let x_1 = 2;
+          let y_1 = 2;
+
+          let x_1z = 7;
+                if (x_1z < 5) {
+                    x_1z = 1;
+                }
+                else {
+                    x_1z = -1;
+                }
+
+          let y_1z = 7;
+                if (y_1z < 5) {
+                    y_1z = 1;
+                }
+                else {
+                    y_1z = -1;
+                }
+
+          let ctandart_znamenatel_1z = 7;
+                if (ctandart_znamenatel_1z < 5) {
+                    ctandart_znamenatel_1z = 1;
+                }
+                else {
+                    ctandart_znamenatel_1z = -1;
+                }
+
+          let ctandart_znamenatel_2z = 7;
+                if (ctandart_znamenatel_2z < 5) {
+                    ctandart_znamenatel_2z = 1;
+                }
+                else {
+                    ctandart_znamenatel_2z = -1;
+                }
+      </script>
+      <script>
+        ctx.beginPath();
+        ctx.strokeStyle = '#fb0303';
+        ctx.lineWidth = 10;
+        
+        ctx.arc(center[0] - delenie * x_1 * x_1z, center[1] + delenie * y_1 * y_1z, 1, 0, 2 * Math.PI); // Указываем координаты x и y на холсте
+        ctx.fill();
+        ctx.stroke();
+        //ctx.moveTo(center[0] + delenie * x_1 * x_1z, center[1] - delenie * y_1 * y_1z);
+        //ctx.lineTo(center[0] + delenie * x_1 * x_1z, center[1] - delenie * y_1 * y_1z);
+        //ctx.moveTo(center[0] + delenie * (ctandart_znamenatel_1 * ctandart_znamenatel_1z - x_1 * x_1z), center[1] - delenie * (ctandart_znamenatel_2 * ctandart_znamenatel_2z - y_1 * y_1z));
+        //ctx.lineTo(center[0] + delenie * (ctandart_znamenatel_1 * ctandart_znamenatel_1z - x_1 * x_1z), center[1] - delenie * (ctandart_znamenatel_2 * ctandart_znamenatel_2z - y_1 * y_1z));
+        ctx.beginPath();
+        ctx.strokeStyle = '#fb0303';
+        ctx.lineWidth = 10;
+        ctx.arc(center[0] + delenie * (ctandart_znamenatel_1 * ctandart_znamenatel_1z - x_1 * x_1z), center[1] - delenie * (ctandart_znamenatel_2 * ctandart_znamenatel_2z - y_1 * y_1z), 1, 0, 2 * Math.PI); // Указываем координаты x и y на холсте
+        ctx.fill();
+        ctx.stroke();
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#fb0303';
+            ctx.moveTo(center[0] + (((-1 * center[1] + (y_1 * y_1z * delenie))) / (ctandart_znamenatel_2 * ctandart_znamenatel_2z)) * ctandart_znamenatel_1 * ctandart_znamenatel_1z  - (x_1 * x_1z * delenie), canvasPlotHeight);
+            ctx.lineTo(((center[1] + (y_1 * y_1z * delenie)) / (ctandart_znamenatel_2 * ctandart_znamenatel_2z)) * (ctandart_znamenatel_1 * ctandart_znamenatel_1z) - (x_1 * x_1z * delenie) + center[0], 0);
+            ctx.stroke();
+      </script>
+      <script>
+        window.addEventListener('resize', () => {
+          const canvas = document.getElementById('canvas');
+          canvas.width = window.innerWidth / 3;
+          canvas.height = window.innerWidth / 3;
+          canvasPlotWidth = canvasPlot.clientWidth;
+          canvasPlotHeight = canvasPlot.clientHeight;
+          center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+          delenie = window.innerWidth / 3 / 20;
+          
+        ctx.beginPath();
+        ctx.lineWidth = 3;
+        ctx.strokestyle = "#ffffff";
+        ctx.moveTo(0, center[1]);
+        ctx.lineTo(canvasPlotWidth, center[1]);
+        ctx.moveTo(center[0], 0);
+        ctx.lineTo(center[0], canvasPlotHeight);
+        ctx.moveTo(center[0] - 10, 10);
+        ctx.lineTo(center[0], 0);
+        ctx.moveTo(center[0] + 10, 10);
+        ctx.lineTo(center[0], 0);
+        ctx.moveTo(canvasPlotWidth - 10, center[1] - 10);
+        ctx.lineTo(canvasPlotWidth, center[1]);
+        ctx.moveTo(canvasPlotWidth - 10, center[1] + 10);
+        ctx.lineTo(canvasPlotWidth, center[1]);
+        // ctx.font = "30px";
+        for (let i = 1; i < (canvasPlotHeight) / delenie; i++) {
+            if (i * delenie != center[1]) {
+                ctx.moveTo(center[0] - delenie / 6, i * delenie);
+                ctx.lineTo(center[0] + delenie / 6, i * delenie);
+                // ctx.lineWidth = 1;
+                
+                // ctx.strokeText('1', 100, 200);
+            }
+        }
+        for (let i = 1; i < (canvasPlotWidth) / delenie; i++) {
+            if (i * delenie != center[0]) {
+                ctx.moveTo(i * delenie, center[1] - delenie / 6);
+                ctx.lineTo(i * delenie, center[1] + delenie / 6);
+            }
+        }
+        ctx.stroke();
+        /* ctx.font = "30px";
+        ctx.lineWidth = 1;
+        for (let i = 1; i < (canvasPlotHeight - 1) / delenie; i++) {
+            // if (i * delenie + 1 < center[1]) {
+                if (i * delenie + 1 == center[1] - delenie) {
+                    ctx.strokeText((center[1] - 1) / delenie - i, center[0] + 2, i * delenie + 11);
+                }
+                if  (i * delenie + 1 == center[1]) {
+                    ctx.strokeText((center[1] - 1) / delenie - i, center[0] + 2, i * delenie + 11);
+                }
+                
+                
+            }
+        
+        for (let i = 1; i < (canvasPlotWidth - 1) / delenie; i++) {
+            
+                
+                // ctx.lineTo(i * delenie + 1, center[1] + 5);
+                if (i * delenie + 1 == center[0] + delenie) {
+                    ctx.strokeText(i - (center[0] - 1) / delenie, i * delenie - 5, center[1] + 10);
+                }
+                
+            } */
+            
+        ctx.strokeText('Y', center[0] + 15, 10);
+        ctx.strokeText('X', canvasPlotWidth - 10, center[1] + 20);
+        ctx.beginPath();
+        ctx.strokeStyle = '#fb0303';
+        ctx.lineWidth = 10;
+        
+        ctx.arc(center[0] - delenie * x_1 * x_1z, center[1] + delenie * y_1 * y_1z, 1, 0, 2 * Math.PI); // Указываем координаты x и y на холсте
+        ctx.fill();
+        ctx.stroke();
+        //ctx.moveTo(center[0] + delenie * x_1 * x_1z, center[1] - delenie * y_1 * y_1z);
+        //ctx.lineTo(center[0] + delenie * x_1 * x_1z, center[1] - delenie * y_1 * y_1z);
+        //ctx.moveTo(center[0] + delenie * (ctandart_znamenatel_1 * ctandart_znamenatel_1z - x_1 * x_1z), center[1] - delenie * (ctandart_znamenatel_2 * ctandart_znamenatel_2z - y_1 * y_1z));
+        //ctx.lineTo(center[0] + delenie * (ctandart_znamenatel_1 * ctandart_znamenatel_1z - x_1 * x_1z), center[1] - delenie * (ctandart_znamenatel_2 * ctandart_znamenatel_2z - y_1 * y_1z));
+        ctx.beginPath();
+        ctx.strokeStyle = '#fb0303';
+        ctx.lineWidth = 10;
+        ctx.arc(center[0] + delenie * (ctandart_znamenatel_1 * ctandart_znamenatel_1z - x_1 * x_1z), center[1] - delenie * (ctandart_znamenatel_2 * ctandart_znamenatel_2z - y_1 * y_1z), 1, 0, 2 * Math.PI); // Указываем координаты x и y на холсте
+        ctx.fill();
+        ctx.stroke();
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#fb0303';
+            ctx.moveTo(center[0] + (((-1 * center[1] + (y_1 * y_1z * delenie))) / (ctandart_znamenatel_2 * ctandart_znamenatel_2z)) * ctandart_znamenatel_1 * ctandart_znamenatel_1z  - (x_1 * x_1z * delenie), canvasPlotHeight);
+            ctx.lineTo(((center[1] + (y_1 * y_1z * delenie)) / (ctandart_znamenatel_2 * ctandart_znamenatel_2z)) * (ctandart_znamenatel_1 * ctandart_znamenatel_1z) - (x_1 * x_1z * delenie) + center[0], 0);
+            ctx.stroke();
+      })
+      </script>
+          <div class="container_float">
+            <div class="inputs">
+                <span class="in" id="chislitel 1" style="border: none; outline: none; text-align: center; padding-bottom: 0.1em;">x - x<sub>1</sub></span>
+                <!-- <input style="height: 0px;"> -->
+                <span class="in1" id="znamenatel 1" style="border: none; border-top: 1px solid; outline: none; text-align: center;">x<sub>2</sub> - x<sub>1</sub></span>
+            </div>
+            <div class="labels">
+                <p></p>
+                <label style="padding-left: 20px; padding-right: 20px;">=</label>
+            </div>
+            <div class="inputs">
+                <span class="in2" id="chislitel 2" style="border: none; outline: none; text-align: center; padding-bottom: 0.1em;">y - y<sub>1</sub></span>
+                <span class="in3" id="znamenatel 2" style="border: none;  border-top: 1px solid; outline: none; text-align: center;">y<sub>2</sub> - y<sub>1</sub></span>
+            </div>
+          </div>
+          <p class="lead">
+            это вид уравнения прямой, где <b>x</b> - аргумент, <b>y</b> - функция, (<b>x<sub>1</sub></b>; <b>y<sub>1</sub></b>) - координаты первой точки, указанной в уравнении, а (<b>x<sub>2</sub></b>; <b>y<sub>2</sub></b>) - координаты второй точки, указанной в уравнении. Заметим, что этот вид уравнения прямой сводится к каноническому: координаты направляющего вектора при таком способе записи уравнения прямой равны (<b>x<sub>2</sub></b> - <b>x<sub>1</sub></b>; <b>y<sub>2</sub></b> - <b>y<sub>1</sub></b>), а координаты точки, через которую проходит прямая (<b>x<sub>1</sub></b>; <b>y<sub>1</sub></b>). 
+          </p>
+          
+          <a class="btn btn-primary" href="exam 8.html">Перейти к практике</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- <p>При \(a \ne 0\) получается два корня уравнения \(ax^2 + bx + c = 0\),
+  для нахождения которых используют формулу
+  $${x}_{1,2} = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p> -->

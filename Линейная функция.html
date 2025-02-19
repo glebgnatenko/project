@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Линейная функция</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" 
+    crossorigin="anonymous">
+    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" 
+    crossorigin="anonymous">
+    </script>
+    
+    <link href="style.css" rel="stylesheet"/>
+    <link href="nav-bar.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+       
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link"  href="index.html">Вступление</a>
+            </li>
+            
+              <a class="nav-link active" href="#">Стандартный вид уравнения линейной функции</a>
+            </li>
+              <a class="nav-link" href="Общий вид уравнения прямой.html">Общий вид уравнения прямой</a>
+            </li>
+            <a class="nav-link"  href="По точке и вектору.html">По точке и вектору</a>
+            </li>
+              <a class="nav-link" href ="В отрезках.html">В отрезках</a> 
+            </li>
+              <a class="nav-link" href="По двум точкам.html">По двум точкам</a>
+            </li>
+              <a class="nav-link" href="Итоги.html">Итоги</a>
+            </il>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+      <div class="row" style="padding-left: 20vw; padding-right: 20vw; padding-top: 1vh;">
+        <div>
+          <canvas id="canvas"></canvas>
+          <script>
+            // Предварительно задаём размеры экрана
+document.getElementById('canvas').width = window.innerWidth / 2;
+document.getElementById('canvas').height = window.innerHeight / 2;
+          </script>
+          <script>
+            const canvas = document.getElementById('canvas');
+            var canvasPlot = document.getElementById('canvas');
+        var ctx = canvasPlot.getContext('2d');
+        canvas.width = window.innerWidth / 3;
+        canvas.height = window.innerWidth / 3;
+        var canvasPlotWidth = canvasPlot.clientWidth;
+        var canvasPlotHeight = canvasPlot.clientHeight;
+        var center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+        var delenie = window.innerWidth / 3 / 20;          
+        ctx.beginPath();
+        ctx.lineWidth = 3;
+        ctx.strokestyle = "#fc0202";
+        ctx.moveTo(0, center[1]);
+        ctx.lineTo(canvasPlotWidth, center[1]);
+        ctx.moveTo(center[0], 0);
+        ctx.lineTo(center[0], canvasPlotHeight);
+        ctx.moveTo(center[0] - 10, 10);
+        ctx.lineTo(center[0], 0);
+        ctx.moveTo(center[0] + 10, 10);
+        ctx.lineTo(center[0], 0);
+        ctx.moveTo(canvasPlotWidth - 10, center[1] - 10);
+        ctx.lineTo(canvasPlotWidth, center[1]);
+        ctx.moveTo(canvasPlotWidth - 10, center[1] + 10);
+        ctx.lineTo(canvasPlotWidth, center[1]);
+        // ctx.font = "30px";
+        for (let i = 1; i < (canvasPlotHeight) / delenie; i++) {
+            if (i * delenie != center[1]) {
+                ctx.moveTo(center[0] - delenie / 6, i * delenie);
+                ctx.lineTo(center[0] + delenie / 6, i * delenie);
+                // ctx.lineWidth = 1;
+                
+                // ctx.strokeText('1', 100, 200);
+            }
+        }
+        for (let i = 1; i < (canvasPlotWidth) / delenie; i++) {
+            if (i * delenie != center[0]) {
+                ctx.moveTo(i * delenie, center[1] - delenie / 6);
+                ctx.lineTo(i * delenie, center[1] + delenie / 6);
+            }
+        }
+        ctx.stroke();
+        /* ctx.font = "30px";
+        ctx.lineWidth = 1;
+        for (let i = 1; i < (canvasPlotHeight - 1) / delenie; i++) {
+            // if (i * delenie + 1 < center[1]) {
+                if (i * delenie + 1 == center[1] - delenie) {
+                    ctx.strokeText((center[1] - 1) / delenie - i, center[0] + 2, i * delenie + 11);
+                }
+                if  (i * delenie + 1 == center[1]) {
+                    ctx.strokeText((center[1] - 1) / delenie - i, center[0] + 2, i * delenie + 11);
+                }
+                
+                
+            }
+        
+        for (let i = 1; i < (canvasPlotWidth - 1) / delenie; i++) {
+            
+                
+                // ctx.lineTo(i * delenie + 1, center[1] + 5);
+                if (i * delenie + 1 == center[0] + delenie) {
+                    ctx.strokeText(i - (center[0] - 1) / delenie, i * delenie - 5, center[1] + 10);
+                }
+                
+            } */
+            
+        ctx.strokeText('Y', center[0] + 15, 10);
+        ctx.strokeText('X', canvasPlotWidth - 10, center[1] + 20);
+      </script>
+      <script>
+        // Переменные для функции
+        var k = 2;
+              var b = 1;
+              // Знаки переменных функции
+              var kz = 1;
+              if (kz < 5) {
+                  kz = 1;
+              }
+              else {
+                  kz = -1;
+              }
+              var bz = 1;
+              if (bz < 5) {
+                  bz = 1;
+              }
+              else {
+                  bz = -1;
+              }
+              </script>
+            <script>
+              ctx.beginPath();
+              ctx.lineWidth = 2;
+              ctx.strokeStyle = '#fb0303';
+              
+              if (k != 0) {
+                  ctx.moveTo(((-1 * center[1] - b * bz * delenie) / (k * kz)) + center[0], canvasPlotHeight);
+                  ctx.lineTo(center[0] + ((center[1] - b * bz * delenie) / (k * kz)), 0);
+              }
+              else {
+                  if (b == 0) {
+                      ctx.moveTo(0, center[1] - (bz * delenie));
+                      ctx.lineTo(canvasPlotWidth, center[1] - (bz * delenie));
+                  }
+                  else {
+                      ctx.moveTo(0, center[1] - (b * bz * delenie));
+                      ctx.lineTo(canvasPlotWidth, center[1] - (b * bz * delenie));
+                  }
+              }
+              ctx.stroke();
+            </script>
+            <script>
+              window.addEventListener('resize', () => {
+                const canvas = document.getElementById('canvas');
+                canvas.width = window.innerWidth / 3;
+                canvas.height = window.innerWidth / 3;
+                canvasPlotWidth = canvasPlot.clientWidth;
+                canvasPlotHeight = canvasPlot.clientHeight;
+                center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+                delenie = window.innerWidth / 3 / 20;
+                
+              ctx.beginPath();
+              ctx.lineWidth = 3;
+              ctx.strokestyle = "#ffffff";
+              ctx.moveTo(0, center[1]);
+              ctx.lineTo(canvasPlotWidth, center[1]);
+              ctx.moveTo(center[0], 0);
+              ctx.lineTo(center[0], canvasPlotHeight);
+              ctx.moveTo(center[0] - 10, 10);
+              ctx.lineTo(center[0], 0);
+              ctx.moveTo(center[0] + 10, 10);
+              ctx.lineTo(center[0], 0);
+              ctx.moveTo(canvasPlotWidth - 10, center[1] - 10);
+              ctx.lineTo(canvasPlotWidth, center[1]);
+              ctx.moveTo(canvasPlotWidth - 10, center[1] + 10);
+              ctx.lineTo(canvasPlotWidth, center[1]);
+              // ctx.font = "30px";
+              for (let i = 1; i < (canvasPlotHeight) / delenie; i++) {
+                  if (i * delenie != center[1]) {
+                      ctx.moveTo(center[0] - delenie / 6, i * delenie);
+                      ctx.lineTo(center[0] + delenie / 6, i * delenie);
+                      // ctx.lineWidth = 1;
+                      
+                      // ctx.strokeText('1', 100, 200);
+                  }
+              }
+              for (let i = 1; i < (canvasPlotWidth) / delenie; i++) {
+                  if (i * delenie != center[0]) {
+                      ctx.moveTo(i * delenie, center[1] - delenie / 6);
+                      ctx.lineTo(i * delenie, center[1] + delenie / 6);
+                  }
+              }
+              ctx.stroke();
+              /* ctx.font = "30px";
+              ctx.lineWidth = 1;
+              for (let i = 1; i < (canvasPlotHeight - 1) / delenie; i++) {
+                  // if (i * delenie + 1 < center[1]) {
+                      if (i * delenie + 1 == center[1] - delenie) {
+                          ctx.strokeText((center[1] - 1) / delenie - i, center[0] + 2, i * delenie + 11);
+                      }
+                      if  (i * delenie + 1 == center[1]) {
+                          ctx.strokeText((center[1] - 1) / delenie - i, center[0] + 2, i * delenie + 11);
+                      }
+                      
+                      
+                  }
+              
+              for (let i = 1; i < (canvasPlotWidth - 1) / delenie; i++) {
+                  
+                      
+                      // ctx.lineTo(i * delenie + 1, center[1] + 5);
+                      if (i * delenie + 1 == center[0] + delenie) {
+                          ctx.strokeText(i - (center[0] - 1) / delenie, i * delenie - 5, center[1] + 10);
+                      }
+                      
+                  } */
+                  
+              ctx.strokeText('Y', center[0] + 15, 10);
+              ctx.strokeText('X', canvasPlotWidth - 10, center[1] + 20);
+              ctx.beginPath();
+              ctx.lineWidth = 2;
+              ctx.strokeStyle = '#fb0303';
+              
+              if (k != 0) {
+                  ctx.moveTo(((-1 * center[1] - b * bz * delenie) / (k * kz)) + center[0], canvasPlotHeight);
+                  ctx.lineTo(center[0] + ((center[1] - b * bz * delenie) / (k * kz)), 0);
+              }
+              else {
+                  if (b == 0) {
+                      ctx.moveTo(0, center[1] - (bz * delenie));
+                      ctx.lineTo(canvasPlotWidth, center[1] - (bz * delenie));
+                  }
+                  else {
+                      ctx.moveTo(0, center[1] - (b * bz * delenie));
+                      ctx.lineTo(canvasPlotWidth, center[1] - (b * bz * delenie));
+                  }
+              }
+              ctx.stroke();
+            })
+            </script>
+          <p class="fw-light"><b>y = kx + b</b></p>
+                <p class="lead">
+                  Это так называемый стандартный вид уравнения линейной функции. Им описывается <b>функциональная зависимость</b>, где <b>y</b> - функция, <b>x</b> - аргумент, <b>k</b> - угловой коэффициент, характеризующий угол наклона прямой (чем больше k, тем больше угол наклона прямой, а при k = 0 прямая становится горизонтальной), а <b>b</b> - свободный член, характеризующий на сколько поднята или опущена прямая относительно оси x (если <b>b</b> положительно (<b>b</b> > 0), то прямая поднята вверх, если <b>b</b> отрицательно (<b>b</b> < 0), то прямая опущена вниз, а если <b>b</b> = 0, то прямая проходит через начало координат).
+                </p>
+                <p class="lead">
+                  Самое время объяснить как работает функциональная зависимость. Возьмём функцию <b>y = 2x + 1</b> (для наглядности ее график изображен на рисунке). Для построения прямой нужно построить две точки и их координаты (легче пояснить на примере: A(4; 5) - это означает что для того, чтобы найти точку A нужно сдвинуться на 4 деления вправо по оси x и подняться на 5 делений вверх по оси y, не меняя значение x, в данном случае равное четырём. Первое значение в скобках называют координатой <b>x</b> (абсциссой), а второе значение - координатой <b>y</b> (ординатой)) должны превращать уравнение в верное числовое равенство. Найдём первую точку: допустим абсцисса (координата <b>x</b>) этой точки равна 1, т.е. <b>x</b> = 1. Подставляем и получаем уравнение: <b>y</b> = 2 + 1. Чтобы найти вторую координату надо решить это уравнение: <b>y</b> = 2 + 1; => <b>y</b> = 3. y - это и есть нужная нам координата. Можно взять вторую точку с координатами (0; 1), получим выражение: 1 = 2 * 0 + 1, что является верным числовым равенством. По этим двум точкам строится прямая, удовлетворяющая исходному уравнению, но нам сейчас важно не это: заметим, что во всех случаях мы подставляли случайное <b>x</b> (понятно что оно может быть любое, т.е. <b>x</b> - независимая переменная, аргумент), а <b>y</b> был решением получившегося уравнения (т.е. <b>y</b> зависит от <b>x</b>, смотря какой <b>x</b> мы получаем определённое значение <b>y</b>. <b>y</b> - зависимая переменная, функция).
+                </p>
+                <p class="lead">
+                  Также с помощью стандартного вида уравнения линейной функции нельзя записать уравнение прямой, <b>параллельной оси y</b>. Если у нас есть функциональная зависимость одной переменной от другой, то запомните: <b>одному</b> значению <b>аргумента</b> соответствует только <b>одно</b> значение <b>функции</b> (но не наоборот: одному значению функции может соответствовать сколько угодно значений аргументов. Если это <b>линейная</b> функция и одному ее значению соответствует несколько значений аргумента, то ее графиком будет горизонтальная прямая), а у вертикальной прямой <b>абсцисса всех ее точек одинаковая</b>, следовательно вертикальная прямая не может быть графиком функции.
+
+                </p>
+                <a class="btn btn-primary" href="exam 1.html">Перейти к практике</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
