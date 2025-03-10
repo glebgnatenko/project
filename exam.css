@@ -1,0 +1,28 @@
+/*Установка адаптивных размеров полю ответа*/
+#answer {
+  font-size: clamp(1px, 1.5vw, 2rem);
+}
+
+#answer > .gfd,
+#answer > .gfdd,
+.textw,
+.textww,
+.input-text {
+  font-size: clamp(1px, 2vw, 2.5rem);
+  width: 40vw;
+  max-width: 360px;
+  /* min-width: 310px; */
+}
+
+#rezultat {
+  font-size: clamp(1px, 1.5vw, 2rem);
+  padding-left: 1rem;
+}
+
+#check {
+  font-size: clamp(7px, 0.7vw, 2rem);
+}
+
+#legend {
+  font-size: clamp(1px, 1vw, 2rem);
+}
