@@ -1,9 +1,0 @@
-.lead {
-  font-size: clamp(7px, 1.5vw, 2rem);
-}
-.fw-light {
-  font-size: clamp(7px, 1.5vw, 2rem);
-}
-.btn-primary {
-  font-size: clamp(7px, 0.7vw, 2rem);
-}
