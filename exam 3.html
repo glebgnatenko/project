@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>
+			Общий вид уравнения прямой
+		</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
+			integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" 
+			crossorigin="anonymous">
+		</script>
+		<link href="style.css" rel="stylesheet"/>
+		<link href="nav-bar.css" rel="stylesheet"/>
+		<link href="exam.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<script src="Methods_for_drawing_geometric_objects.js"></script>
+		<script>
+			// Переменные для общего уравнения прямой
+			var A = 1;
+			if (A == 0) {
+				A = 1;
+			}
+			var B = 0;
+			var C = A * parseInt(Math.random() * 10);
+			if (C == 0) {
+				C = A
+			}
+			// Знаки переменных общего уравнения
+			var Az = 1;
+			if (Az < 5) {
+				Az = 1;
+			}
+			else {
+				Az = -1;
+			}
+			var Bz = parseInt(Math.random() * 10);
+			if (Bz < 5) {
+				Bz = 1;
+			}
+			else {
+				Bz = -1;
+			}
+			var Cz = parseInt(Math.random() * 10);
+			if (Cz < 5) {
+				Cz = 1;
+			}
+			else {
+				Cz = -1;
+			}
+		</script>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+								Вступление
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Линейная функция.html">
+                                Стандартный вид уравнения линейной функции
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link active" href="#">
+								Общий вид уравнения прямой
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="По точке и вектору.html">
+								По точке и вектору
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="В отрезках.html">
+								В отрезках
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="По двум точкам.html">
+								По двум точкам
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Итоги.html">
+								Итоги
+							</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		<div class="row">
+			<div>
+				<a class="btn btn-primary" href="Общий вид уравнения прямой.html">
+					Вернуться к параграфу
+				</a>
+				<p class="fw-light">
+					Задача №5:
+				</p>
+				<p class="lead">
+					Запишите уравнение вертикальной прямой, проходящей через точки с координатами
+				</p>
+				<input type="text" class="textw" id="z_g" style="outline: none; border: none; text-align: right;">
+				<script>
+					document.getElementsByClassName("textw")[0].value = "(" + ((C * Cz * -1) / (A * Az)) + "; " + (C * Cz * parseInt(Math.random() * 10) + Cz * 13) + ") и (" + ((C * Cz * -1) / (A * Az)) + "; " + (C * Cz * parseInt(Math.random() * 10)) + ')';
+				</script>
+				<p class="lead">
+					Пример ответа: x - y + 25 = 0.
+				</p>
+				<p id="answer">
+					Ответ: <input type="text" id="z_1" class="gfdd">
+				</p>
+				<div>
+					<button onclick="proverit();" id="check">Проверить</button>
+					<span id="rezultat"></span>
+				</div>
+				<p class="lead" id="legend">
+					(На этом графике красным цветом будут нарисованы прямая, заданная в условии задачи. Если ваш ответ будет неправильный, то голубым цветом нарисуется прямая, заданная вашим уравнением, чтобы вы смогли найти у вас ошибку. Если хотите получить новую задачу, то обновляйте страницу до тех пор, пока в условии не сменятся числа)
+				</p>
+				<canvas id="canvas"></canvas>
+				<script>
+					const canvas = document.getElementById('canvas');
+					var canvasPlot = document.getElementById('canvas');
+					var ctx = canvasPlot.getContext('2d');
+					canvas.width = window.innerWidth / 3;
+					canvas.height = window.innerWidth / 3;
+					var canvasPlotWidth = canvasPlot.clientWidth;
+					var canvasPlotHeight = canvasPlot.clientHeight;
+					var center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+					var delenie = window.innerWidth / 3 / 20;          
+					Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+				</script>
+				<script>
+					answer = 0
+					function proverit() {
+						answer = 1;
+						ctx.clearRect(0, 0, canvasPlotWidth, canvasPlotHeight);
+						ctx.strokeStyle = "#ffffff";
+						ctx.strokeRect(0, 0, canvasPlotWidth, canvasPlotHeight);
+						canvasPlot = document.getElementById('canvas');
+						ctx = canvasPlot.getContext('2d');
+						canvas.width = window.innerWidth / 3;
+						canvas.height = window.innerWidth / 3;
+						canvasPlotWidth = canvasPlot.clientWidth;
+						canvasPlotHeight = canvasPlot.clientHeight;
+						center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+						delenie = window.innerWidth / 3 / 20;
+						Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+						answer_client = document.getElementsByClassName("gfdd")[0].value; // Получение уравнения пользователя из <input> в виде строки.
+						if (answer_client != "") {
+							let yravnenie = answer_client.split(""); // Создание списка из строки, полученной ранее, где каждый элемент списка является отдельным символом, входящим в эту строку.
+
+							// Во всех комментариях в скрипте y, x, A, B, и C употребляются в чисто математическом значении, они независят от содержания скрипта.
+
+							// Пример с конкретными значениями:
+							// pr_otv_zadachi_1 = '-20x + 13y - 5 = 0'
+							// yravnenie = ['-', '2', '0', 'x', ' ', '+', ' ', '1', '3', 'y', ' ', '-', ' ', '5', ' ', '=', ' ', '0']
+							// Определяем знак перед A: '-'; => знак перед A = -1.
+							// Делаем срез символов, нужных для записи |A|, и получаем их в виде: ['2', '0'].
+							// Соединяем символы в одну строку: '20'.
+							// Получаем |A|, путем изменения типа данных на Number: |A| = 10.
+							//
+							// Определяем знак перед B: '+'; => знак перед B = 1.
+							// Делаем срез символов, нужных для записи |B|, и получаем их в виде: ['1', '3'].
+							// Соединяем символы в одну строку: '13'.
+							// Получаем |B|, путем изменения типа данных на Number: |B| = 10.
+							//
+							// Определяем знак перед C: '-'; => знак перед C = -1.
+							// Делаем срез символов, нужных для записи |C|, и получаем их в виде: ['5'].
+							// Соединяем символы в одну строку: '5'.
+							// Получаем |C|, путем изменения типа данных на Number: |C| = 5.
+
+							let koefficienti = []; // Создаем список, где будет индекс символа '=' (всегда будет). Ещё там будет всегда один из индексов следующих символов: 'x' или 'y' (они могут быть там одновременно). Зная, как расположены символы записи коэффициентов относительно полученных нами индексов мы будем это реализовывать.
+							for (let i = 0; i < yravnenie.length; i++) { // i принимает все целые значения на промежутке [0; yravnenie.length - 1]. i будет использоваться как значение индекса, т.е. этот цикл пройдется по каждому элементу списка yravnenie.
+								if (yravnenie[i] == 'x' || yravnenie[i] == 'y' || yravnenie[i] == '=') { // Проверка, равен ли i-й элемент списка yravnenie нужным нам значениям.
+									koefficienti.push(i); // Добавление i в список koefficienti. При верности условия, i будет являться индексом нужого нам элемента из списка yravnenie.
+								}				
+							}
+							// По итогу, мы получаем нужные нам индексы.
+
+							// В названиях переменных есть части, говорящие о их содержании, чтобы было легче ориентироваться в коде. Объясню их смысл:
+							// Применяется только к спискам! _string после основного названия переменной означает, что каждый элемент списка имеет строковый тип данных.
+							// _p - 'пользователя'. 
+							// z - знак (т.е. переменная принимает только значния 1 (+) или -1 (-)).
+
+							var A_string = []; // Должен содержать срез коэффициента A из уравнения пользователя. Начальное значение не задано.
+							A_p = 0; // Должен содержать |A| пользователя. Начальное значение задано '|' для корректности (т.к. '' (которое хотели задать) = 0, что в некоторых случаях будет причиной неправильного выполнения программы).
+							A_pz = 1; // Должен содержать знак перед коэффициентом A пользователя (1 (+) или -1 (-)). Начальное значение задано '|' для корректности (т.к. '' (которое хотели задать) = 0, что в некоторых случаях будет причиной неправильного выполнения программы).
+							var B_string = []; // Должен содержать срез коэффициента B из уравнения пользователя. Начальное значение не задано.
+							B_p = 0; // Должен содержать |B| пользователя. Начальное значение задано '|' для корректности (т.к. '' (которое хотели задать) = 0, что в некоторых случаях будет причиной неправильного выполнения программы).
+							B_pz = 1; // Должен содержать знак перед коэффициентом B пользователя (1 (+) или -1 (-)). Начальное значение задано '|' для корректности (т.к. '' (которое хотели задать) = 0, что в некоторых случаях будет причиной неправильного выполнения программы).
+							var C_string = []; // Должен содержать срез коэффициента C из уравнения пользователя. Начальное значение не задано.
+							C_p = 0; // Должен содержать |C| пользователя. Начальное значение задано '|' для корректности (т.к. '' (которое хотели задать) = 0, что в некоторых случаях будет причиной неправильного выполнения программы).
+							C_pz = 1; // Должен содержать знак перед коэффициентом C пользователя (1 (+) или -1 (-)). Начальное значение задано '|' для корректности (т.к. '' (которое хотели задать) = 0, что в некоторых случаях будет причиной неправильного выполнения программы).
+
+							// Напоминаю, что во всех комментариях в скрипте y, x, A, B, и C употребляются в чисто математическом значении, они независят от содержания скрипта.
+
+							// Блок, определяющий коэффициенты в уравнении пользователя, исходя из полученных данных.
+							if ((yravnenie[koefficienti[0]] == 'y') || (yravnenie[koefficienti[1]] == 'y')) { // == (Ax + By + C = 0) или (By + C = 0)
+								if (yravnenie[koefficienti[1]] == 'y') { // == (Ax + By + C = 0)
+									if (yravnenie[0] != '-') { // != (-Ax + ... = 0)
+										A_pz = 1; // Очевидный вывод из верности условия.
+										if (koefficienti[0] != 0) { // != (x + ... = 0)
+											A_string = yravnenie.slice(0, koefficienti[0]); // Срез коэффициента A (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+											A_p = Number(A_string.join('')); // Соединение цифр коэффициента A, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной A_p на Number.
+										}
+										else if (koefficienti[0] == 0) { // == (x + ... = 0)
+											A_p = 1; // Очевидный вывод из верности условия.
+										}
+									}
+									else if (yravnenie[0] == '-') { // == (-Ax + ... = 0)
+										A_pz = -1; // Очевидный вывод из верности условия.
+										if (koefficienti[0] != 1) { // != (-x + ... = 0)
+											A_string = yravnenie.slice(1, koefficienti[0]); // Срез коэффициента A (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+											A_p = Number(A_string.join('')); // Соединение цифр коэффициента A, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной A_p на Number.
+										}
+										else if (koefficienti[0] == 1) { // == (-x + ... = 0)
+											A_p = 1; // Очевидный вывод из верности условия.
+										}
+									}
+									if ((koefficienti[0] + 4) != koefficienti[1]) { // != (Ax + y + C = 0)
+										B_string = yravnenie.slice(koefficienti[0] + 4, koefficienti[1]); // Срез коэффициента B (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+										B_p = Number(B_string.join('')); // Соединение цифр коэффициента B, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной B_p на Number.
+									}
+									else if ((koefficienti[0] + 4) == koefficienti[1]) { // == (Ax + y + C = 0)
+										B_p = 1; // Очевидный вывод из верности условия.
+									}
+									if (yravnenie[koefficienti[0] + 2] == '+') { // == (... + By + ... = 0)
+										B_pz = 1; // Очевидный вывод из верности условия.
+									}
+									else if (yravnenie[koefficienti[0] + 2] == '-') { // == (... - By + ... = 0)
+										B_pz = -1; // Очевидный вывод из верности условия.
+									}
+									if (koefficienti[1] != (koefficienti[2] - 2)) { // != (Ax + By = 0)
+										C_string = yravnenie.slice(koefficienti[1] + 4, koefficienti[2] - 1); // Срез коэффициента C (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+										C_p = Number(C_string.join('')); // Соединение цифр коэффициента C, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной C_p на Number.
+									}
+									else if (yravnenie[koefficienti[1] + 2] == '+') { // == (... + C = 0)
+										C_pz = 1; // Очевидный вывод из верности условия.
+									}
+									if (yravnenie[koefficienti[1] + 2] == '-') { // == (... - C = 0)
+										C_pz = -1; // Очевидный вывод из верности условия.
+									}
+								}
+								else if (yravnenie[koefficienti[0]] == 'y') { // == (By + C = 0)
+									if (yravnenie[0] != '-') { // != (-By + ... = 0)
+										B_pz = 1;
+										if (koefficienti[0] != 0) { // != (y + ... = 0)
+											B_string = yravnenie.slice(0, koefficienti[0]); // Срез коэффициента B (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+											B_p = Number(B_string.join('')); // Соединение цифр коэффициента B, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной B_p на Number.
+										}
+										else if (koefficienti[0] == 0) { // == (y + ... = 0)
+											B_p = 1; // Очевидный вывод из верности условия.
+										}
+									}
+									else if (yravnenie[0] == '-') { // == (-By + ... = 0)
+										B_pz = -1; // Очевидный вывод из верности условия.
+										if (koefficienti[0] != 1) { // != (-y + ... = 0)
+											B_string = yravnenie.slice(1, koefficienti[0]); // Срез коэффициента B (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+											B_p = Number(B_string.join('')); // Соединение цифр коэффициента B, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной B_p на Number.
+										}
+										else if (koefficienti[0] == 1) { // == (-y + ... = 0)
+											B_p = 1; // Очевидный вывод из верности условия.
+										}
+									}
+									if (koefficienti[0] != (koefficienti[1] - 2)) { // != (By = 0)
+										C_string = yravnenie.slice(koefficienti[0] + 4, koefficienti[1] - 1); // Срез коэффициента C (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+										C_p = Number(C_string.join('')); // Соединение цифр коэффициента C, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной C_p на Number.
+									}
+									else if (yravnenie[koefficienti[0] + 2] == '+') { // == (... + C = 0)
+										C_pz = 1; // Очевидный вывод из верности условия.
+									}
+									if (yravnenie[koefficienti[0] + 2] == '-') { // == (... - C = 0)
+											C_pz = -1; // Очевидный вывод из верности условия.
+									}
+								}
+							}
+							else if ((yravnenie[koefficienti[0]] == 'x') && (koefficienti.length == 2)) { // == (Ax + C = 0)
+								if (yravnenie[0] != '-') { // != (-Ax + ... = 0)
+									A_pz = 1;
+									if (koefficienti[0] != 0) { // != (x + ... = 0)
+										A_string = yravnenie.slice(0, koefficienti[0]); // Срез коэффициента A (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+										A_p = Number(A_string.join('')); // Соединение цифр коэффициента A, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной A_p на Number.
+									}
+									else if (koefficienti[0] == 0) { // == (x + ... = 0)
+										A_p = 1; // Очевидный вывод из верности условия.
+									}
+								}
+								else if (yravnenie[0] == '-') { // == (-Ax + ... = 0)
+									A_pz = -1; // Очевидный вывод из верности условия.
+									if (koefficienti[0] != 1) { // != (-x + ... = 0)
+										A_string = yravnenie.slice(1, koefficienti[0]); // Срез коэффициента A (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+										A_p = Number(A_string.join('')); // Соединение цифр коэффициента A, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной A_p на Number.
+									}
+									else if (koefficienti[0] == 1) { // == (-x + ... = 0)
+										A_p = 1; // Очевидный вывод из верности условия.
+									}
+								}
+								if (koefficienti[0] != (koefficienti[1] - 2)) { // != (Ax = 0)
+									C_string = yravnenie.slice(koefficienti[0] + 4, koefficienti[1] - 1); // Срез коэффициента C (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+									C_p = Number(C_string.join('')); // Соединение цифр коэффициента C, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной C_p на Number.
+								}
+								else if (yravnenie[koefficienti[0] + 2] == '+') { // == (... + C = 0)
+									C_pz = 1; // Очевидный вывод из верности условия.
+								}
+								if (yravnenie[koefficienti[0] + 2] == '-') { // == (... - C = 0)
+										C_pz = -1; // Очевидный вывод из верности условия.
+								}
+							}
+							// Конец блока, определяющего коэффициенты в уравнении пользователя, исходя из полученных данных.
+							
+							Draw_Straight_General_View(A_p, A_pz, B_p, B_pz, C_p, C_pz, '#0bb7d5');
+						}
+						if  (A == 0 && B == 0) {
+							A = 1;
+						}
+						Draw_Straight_General_View(A, Az, B, Bz, C, Cz,'#fb0303');
+						// Неизменные переменные в общем виде уравнения прямой
+						var x = 'x';
+						var y = 'y';
+
+						// Знаки действий в заданном общем уравнении прямой
+						var znak_A = '';
+						var znak_B = '';
+						var znak_C = '';
+
+						// Проверка действия: сложение или вычитание (+ или -)
+						if (Az == 1) {
+							znak_A = '';
+						}
+
+						else {
+							znak_A = '-';
+						}
+
+						if (Bz == 1) {
+							znak_B = ' + ';
+						}
+						else {
+							znak_B = ' - ';
+						}
+						if (Cz == 1) {
+							znak_C = ' + ';
+						}
+						else {
+							znak_C = ' - ';
+						}
+						// Конец проверки знаков: виды действий в уравнении определены
+						// В принципе общий вид уравнения прямой и уравнение прямой ничем не отличаются, поэтому можно свести задачу к предыдущей, но есть вариант B = 0, этот случай тоже прийдётся рассмотреть	
+						// Сведение задачи к предыдущей
+						if (B != 0) {
+							// Замена уравнения Ax ± 1y ± C = 0 на Ax ± y ± C = 0
+							if (B == 1) {
+								B = '';
+							}
+							if (A != 0) {
+								// Смена записи 1x ± By ± C = 0 на x ± By ± C = 0
+								if (A == 1) {
+									A = '';		
+								}
+								// Смена записи Ax ± By ± 0C = 0 на Ax ± By = 0
+								if (C == 0) {
+									znak_C = '';
+									C = '';
+								}
+							}
+							// Смена записи 0x ± By ± C = 0 на By ± C = 0
+							else {
+								// Аннулирование слагаемого Ax
+								A = '';
+								x = '';
+								znak_A = '';
+								// Корректировка знака перед By 
+								if (znak_B == ' + ') {
+									znak_B = '';
+								}
+								else {
+									znak_B = '-';
+								}
+								// Критический случай: замена уравнения By = 0 на By ± 1 = 0
+								if (C == 0) {
+									C = 1;
+								}
+							}
+							// Конец корректировки: мы привели уравнение к стандартному виду при B != 0
+						}
+						// Рассмотрение случая B = 0
+						else {
+							// Аннулирование слагаемого By
+							B = '';
+							znak_B = '';
+							y = '';
+							// Замена уравнения 0x ± С = 0 на x ± C = 0
+							if (A == 0) {
+								A = 1;
+							}
+							if (A == 1) {
+								A = '';
+							}
+							// Замена уравнения Ax ± 0C = 0 на Ax ± 1 = 0
+							if (C == 0) {
+								C = 1;
+							}
+						}
+						// Ура, уравнение общего вида приведено к стандартному виду
+						pr_otv_zadachi_1 = znak_A + A + x + znak_B + B + y + znak_C + C + ' = 0'; 
+						otv_uch_1 = document.getElementById('z_1').value;
+						ball = 0;
+						if (otv_uch_1 == pr_otv_zadachi_1){
+							ball += 1;
+						}
+						if (ball == 1){
+							document.getElementById('rezultat').innerHTML = "Правильно";
+						}
+						else {
+							document.getElementById('rezultat').innerHTML = 'Правильный ответ: ' + pr_otv_zadachi_1;
+						}
+					}
+				</script>
+				<script>
+					window.addEventListener('resize', () => {
+						const canvas = document.getElementById('canvas');
+						canvas.width = window.innerWidth / 3;
+						canvas.height = window.innerWidth / 3;
+						canvasPlotWidth = canvasPlot.clientWidth;
+						canvasPlotHeight = canvasPlot.clientHeight;
+						center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+						delenie = window.innerWidth / 3 / 20;
+						Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+						if (answer == 1) {
+							if (answer_client != "") {
+								Draw_Straight_General_View(A_p, A_pz, B_p, B_pz, C_p, C_pz, '#0bb7d5');
+							}
+							Draw_Straight_General_View(A, Az, B, Bz, C, Cz,'#fb0303');
+						}
+					})
+				</script>
+				<p></p>
+				<a class="btn btn-primary" href="exam 4.1.html">Продолжить</a>
+			</div>
+		</div>
+	</body>
+</html>

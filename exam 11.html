@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>
+			Квадратичная функция
+		</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
+			integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" 
+			crossorigin="anonymous">
+		</script>
+		<link href="style.css" rel="stylesheet"/>
+		<link href="nav-bar.css" rel="stylesheet"/>
+		<link href="exam.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<script src="Methods_for_drawing_geometric_objects.js"></script>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="main.html">
+								Вступление
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link active" href="#">
+                                Стандартный вид уравнения квадратичной функции
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Через координаты вершины.html">
+								Уравнение квадратичной функции через координаты вершины
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Итоги ко второй главе.html">
+								Итоги
+							</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		<div class="row">
+			<div>
+				<a class="btn btn-primary" href="abs.html">
+					Вернуться к параграфу
+				</a>
+				<p class="fw-light">
+					Задача:
+				</p>
+				<p class="lead">
+					Дана функция:
+				</p>
+				<span class="textw" id='quartic_standart'></span>
+				<script>
+					// y = a(x + b/2a)^2 - (b^2/4a + c)
+					A_k = parseInt(Math.random() * 10);
+					if (A_k == 0) {
+						A_k = 1;
+					}
+					A_kz = parseInt(Math.random() * 10);
+					if (A_kz < 5) {
+						A_kz = 1;
+					}
+					else {
+						A_kz = -1;
+					}
+
+					B_k = parseInt(Math.random() * 10);
+					B_kz = parseInt(Math.random() * 10);
+					if (B_kz < 5) {
+						B_kz = 1;
+					}
+					else {
+						B_kz = -1;
+					}
+
+					C_k = parseInt(Math.random() * 10);
+					C_kz = parseInt(Math.random() * 10);
+					if (C_kz < 5) {
+						C_kz = 1;
+					}
+					else {
+						C_kz = -1;
+					}
+
+					A_k_2 = A_k;
+					A_k_2z = A_kz;
+
+					B_k_2 = -1 * ((B_k * B_kz) / (2 * A_k * A_kz));
+					B_k_2z = 1;
+					if (B_k_2 < 0) {
+						B_k_2z = -1;
+						B_k_2 *= B_k_2z;
+					}
+
+					C_k_2 = -1 * ((B_k ** 2) / (4 * A_k * A_kz)) + C_k * C_kz;
+					C_k_2z = 1;
+					if (C_k_2 < 0) {
+						C_k_2z = -1;
+						C_k_2 *= C_k_2z;
+					}
+
+					// ctx.beginPath();
+					// ctx.lineWidth = 3;
+					// ctx.strokeStyle = '#fb0303';
+					// ctx.moveTo(center[0] - ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 - B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+					// ctx.quadraticCurveTo(center[0] + B_k_2 * B_k_2z * delenie, center[1] + A_k_2z * center[1] - (2 * C_k_2 * C_k_2z) * delenie, center[0] + ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 + B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+					// ctx.stroke();
+					A_k_symvol = '';
+					if (A_k != 1) {
+						A_k_symvol = A_k * A_kz;
+					}
+					else if (A_k == 1) {
+						if (A_kz == -1) {
+							A_k_symvol = '-';
+						}
+					}
+
+					B_k_znak = '';
+					x = '';
+					if (B_k != 0) {
+						x = 'x';
+						if (B_kz == 1) {
+							B_k_znak = ' + ';
+						}
+						else if (B_kz == -1) {
+							B_k_znak = ' - ';
+						}
+					}
+					C_k_znak = '';
+					if (C_k != 0) {
+						if (C_kz == 1) {
+							C_k_znak = ' + ';
+						}
+						else if (C_kz == -1) {
+							C_k_znak = ' - ';
+						}
+					}
+					B_kk = ''
+					if (B_k != 0) {
+						if (B_k != 1) {
+							B_kk = B_k;
+						}
+					}
+					
+					C_kk = ''
+					if (C_k != 0) {
+						C_kk = C_k;
+					}
+					standart_quadratic_function = 'y = ' + A_k_symvol + 'x' + "<sup>2</sup>";
+					document.getElementById('quartic_standart').innerHTML = 'y = ' + A_k_symvol + 'x' + "<sup>2</sup>" + B_k_znak + B_kk + x + C_k_znak + C_kk;
+				</script>	
+				<p class="lead">
+					Куда (вверх или вниз) направлены ветви параболы, заданной этим уравнением? Пример ответа: Вверх
+				</p>
+				<p id="answer">
+					Ответ: <input type="text" id="z_1" class="gfd">
+				</p>
+				<div>
+					<button onclick="proverit();" id="check">Проверить</button>
+					<span id="rezultat"></span>
+				</div>
+				<p class="lead" id="legend">
+					(На этом графике красным цветом будут нарисованы парабола, заданная в условии задачи. Если хотите получить новую задачу, то обновляйте страницу до тех пор, пока в условии не сменятся числа)
+				</p>
+				<div>
+					<canvas id="canvas"></canvas>
+				</div>
+				<script>
+					const canvas = document.getElementById('canvas');
+					var canvasPlot = document.getElementById('canvas');
+					var ctx = canvasPlot.getContext('2d');
+					canvas.width = window.innerWidth / 3;
+					canvas.height = window.innerWidth / 3;
+					var canvasPlotWidth = canvasPlot.clientWidth;
+					var canvasPlotHeight = canvasPlot.clientHeight;
+					var center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+					var delenie = window.innerWidth / 3 / 20;          
+					Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+				</script>
+				<script>
+					answer = 0
+					function proverit() {
+						answer = 1;
+						ctx.clearRect(0, 0, canvasPlotWidth, canvasPlotHeight);
+						ctx.strokeStyle = "#ffffff";
+						ctx.strokeRect(0, 0, canvasPlotWidth, canvasPlotHeight);
+						// const canvas = document.getElementById('canvas');
+						canvasPlot = document.getElementById('canvas');
+						ctx = canvasPlot.getContext('2d');
+						canvas.width = window.innerWidth / 3;
+						canvas.height = window.innerWidth / 3;
+						canvasPlotWidth = canvasPlot.clientWidth;
+						canvasPlotHeight = canvasPlot.clientHeight;
+						center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+						delenie = window.innerWidth / 3 / 20;          
+						Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+						answer_client = document.getElementsByClassName("gfd")[0].value;
+						// if (answer_client != "") {
+						// 	yravnenie = answer_client.split("");
+						// 	koefficienti = [];
+						// 	for (let i = 0; i < yravnenie.length; i++) {
+						// 		if (yravnenie[i] == ';') {
+						// 			koefficienti.push(i);
+						// 		}
+						// 	}
+						// 	x_1_string = [];
+						// 	x_1p = 0;
+						// 	x_1zp = 1;
+						// 	y_1_string = [];
+						// 	y_1p = 0;
+						// 	y_1zp = 1;
+						// 	if (yravnenie[1] != '-') {
+						// 		x_1_string = yravnenie.slice(1, koefficienti[0]);
+						// 		x_1p = Number(x_1_string.join(''));
+						// 	}
+						// 	else {
+						// 		x_1_string = yravnenie.slice(2, koefficienti[0]);
+						// 		x_1p = Number(x_1_string.join(''));
+						// 		x_1zp = -1;
+						// 	}
+						// 	if (yravnenie[koefficienti[0] + 2] != '-') {
+						// 		y_1_string = yravnenie.slice(koefficienti[0] + 2, yravnenie.length - 1);
+						// 		y_1p = Number(y_1_string.join(''));
+						// 	}
+						// 	else {
+						// 		y_1_string = yravnenie.slice(koefficienti[0] + 3, yravnenie.length - 1);
+						// 		y_1p = Number(y_1_string.join(''));
+						// 		y_1zp = -1;
+						// 	}
+							
+						// 	Draw_Point(center[0] + delenie * x_1p * x_1zp, center[1] - delenie * y_1p * y_1zp, '#0bb7d5');
+						// }
+						// Draw_Point(center[0], center[1] - delenie * (C_k * C_kz), "#fb0303");
+						// Draw_Straight_Standart_Form_Linear_Function(k, kz, b, bz, "#fb0303");
+						ctx.beginPath();
+						ctx.lineWidth = 3;
+						ctx.strokeStyle = '#fb0303';
+						ctx.moveTo(center[0] - ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 - B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+						ctx.quadraticCurveTo(center[0] + B_k_2 * B_k_2z * delenie, center[1] + A_k_2z * center[1] - (2 * C_k_2 * C_k_2z) * delenie, center[0] + ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 + B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+						ctx.stroke();
+						if (A_kz == -1) {
+							pr_otv_zadachi_1 = 'Вниз';
+						}
+						else {
+							pr_otv_zadachi_1 = 'Вверх';
+						}
+						if (answer_client == pr_otv_zadachi_1){
+							document.getElementById('rezultat').innerHTML = "Правильно";
+						}
+						else {
+							document.getElementById('rezultat').innerHTML = 'Правильный ответ: ' + pr_otv_zadachi_1;
+						}
+					}
+				</script>
+				<script>
+					window.addEventListener('resize', () => {
+						// const canvas = document.getElementById('canvas');
+						canvas.width = window.innerWidth / 3;
+						canvas.height = window.innerWidth / 3;
+						canvasPlotWidth = canvasPlot.clientWidth;
+						canvasPlotHeight = canvasPlot.clientHeight;
+						center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+						delenie = window.innerWidth / 3 / 20;
+						Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+						if (answer == 1) {
+							// if (answer_client != "") {
+							// 	Draw_Point(center[0] + delenie * x_1p * x_1zp, center[1] - delenie * y_1p * y_1zp, '#0bb7d5');
+							// }
+							// Draw_Point(center[0], center[1] - delenie * (C_k * C_kz), "#fb0303");
+							// Draw_Straight_Standart_Form_Linear_Function(k, kz, b, bz, "#fb0303");
+							ctx.beginPath();
+							ctx.lineWidth = 3;
+							ctx.strokeStyle = '#fb0303';
+							ctx.moveTo(center[0] - ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 - B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+							ctx.quadraticCurveTo(center[0] + B_k_2 * B_k_2z * delenie, center[1] + A_k_2z * center[1] - (2 * C_k_2 * C_k_2z) * delenie, center[0] + ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 + B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+							ctx.stroke();
+						}
+					})
+				</script>
+				<p></p>
+				<a class="btn btn-primary" href="exam 12.html">Продолжить
+				</a>
+			</div>
+		</div>
+	</body>
+</html>

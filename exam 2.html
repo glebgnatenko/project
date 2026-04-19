@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+        <title>
+			Линейная функция
+		</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous">
+		</script>
+        <link href="style.css" rel="stylesheet"/>
+        <link href="nav-bar.css" rel="stylesheet"/>
+        <link href="exam.css" rel="stylesheet"/>
+    </head>
+    <body>
+		<script src="Methods_for_drawing_geometric_objects.js"></script>
+        <script>
+            // Переменные для функции
+            var k = parseInt(Math.random() * 10);
+            if (k == 0) {
+                k = 1;
+            }
+            var b = parseInt(Math.random() * 10);
+            if (b == 0) {
+                b = 1;
+            }
+            switch (k) {
+                case 3:
+                    while (b * k > 9) {
+                        b = b - 1;
+                    }
+                    b = b * k;
+                break;
+                case 6:
+                    while (b * k > 9) {
+                        b = b - 1;
+                    }
+                    b = b * k;
+                break;
+                case 7:
+                    while (b * k > 9) {
+                        b = b - 1;
+                    }
+                    b = b * k;
+                break;
+                case 9:
+                    while (b * k > 9) {
+                        b = b - 1;
+                    }
+                    b = b * k;
+                 break;
+            }
+            // Знаки переменных функции
+            var kz = parseInt(Math.random() * 10);
+            if (kz < 5) {
+                kz = 1;
+            } else {
+                kz = -1;
+            }
+            var bz = parseInt(Math.random() * 10);
+            if (bz < 5) {
+                bz = 1;
+            } else {
+                bz = -1;
+            }
+        </script>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+								Вступление
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link active" href="#">
+                                Стандартный вид уравнения линейной функции
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Общий вид уравнения прямой.html">
+								Общий вид уравнения прямой
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="По точке и вектору.html">
+								По точке и вектору
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="В отрезках.html">
+								В отрезках
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="По двум точкам.html">
+								По двум точкам
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Итоги.html">
+								Итоги
+							</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+            <div>
+                <a class="btn btn-primary" href="Линейная функция.html">
+					Вернуться к параграфу
+                </a>
+                <p class="fw-light">
+					Задача №4:
+				</p>
+                <p class="lead">
+                    Запишите уравнение прямой в виде стандартного уравнения линейной функции, если ее график пересекает ось x в точке
+                </p>
+                <input type="text" class="textw" id="z_g" style="outline: none; border: none; text-align: right"/>
+                <script>
+                    pr_otv_zadachi_1 = "(" + ((b * bz) / (k * kz)) * -1 + "; 0)";
+                    document.getElementsByClassName("textw")[0].value = pr_otv_zadachi_1;
+                </script>
+                <p class="lead">
+					А ось y в точке
+				</p>
+                <input type="text" class="textww" id="z_g" style="outline: none; border: none; text-align: right"/>
+                <script>
+                    pr_otv_zadachi_2 = "(0; " + b * bz + ")";
+                    document.getElementsByClassName("textww")[0].value = pr_otv_zadachi_2;
+                </script>
+                <p class="lead">
+					Пример ответа: y = 2x + 1.
+				</p>
+                <p id="answer">
+                    Ответ: <input type="text" id="z_1" class="gfd" />
+                </p>
+                <div>
+                    <button onclick="proverit();" id="check">
+						Проверить
+					</button>
+                    <span id="rezultat"></span>
+					<script>
+						// Введение неизменных переменных и знаков действия в уравнении линейной функции
+                        var x = "x";
+                        var znak_k = "";
+                        var znak_b = "";
+
+                        // Проверка действия: сложение или вычитание (+ или -)
+                        if (kz == 1) {
+                            znak_k = "";
+                        }
+						else {
+                            znak_k = "-";
+                        }
+                        if (bz == 1) {
+                            znak_b = " + ";
+                        }
+						else {
+                            znak_b = " - ";
+                        }
+                        // Конец проверки: знаки действий в уравнении определены
+                        // Корректная запись уравнения линейной функции
+                        // Проверка на обнуление первого слагаемого kx
+                        if (k != 0) {
+                            // Смена записи 1x на x
+                            if (k == 1) {
+                                k = "";
+                            }
+                            // Смена записи y = kx + 0b на y = kx
+                            if (b == 0) {
+                                b = "";
+                                znak_b = "";
+                            }
+                        }
+                        // Смена записи y = 0x + b на y = b
+                        else {
+                            k = "";
+                            znak_k = "";
+                            x = "";
+                            // корректировка знака перед b
+                            if (znak_b == " + ") {
+                                znak_b = "";
+                            }
+							else {
+                                znak_b = "-";
+                            }
+
+                            // Критический случай: замена уравнения y = 0 на y = 1
+                            if (b == 0) {
+                                b = 1;
+                            }
+                        }
+                        // Конец корректировки: мы привели уравнение линейной функции к стандартному виду
+                        pr_otv_zadachi_1t = "y = " + znak_k + k + x + znak_b + b;
+					</script>
+                </div>
+                <p class="lead" id="legend">
+                    (На этом графике красным цветом будут нарисованы прямая, заданная в условии задачи, и ее точки пересечения с осью x и с осью y. Если ваш ответ будет неправильный, то голубым цветом нарисуется прямая, заданная вашим уравнением, чтобы вы смогли найти у вас ошибку. Если хотите получить новую задачу, то обновляйте страницу до тех пор, пока в условии не сменятся числа)
+                </p>
+                <canvas id="canvas"></canvas>
+                <script>
+                    const canvas = document.getElementById("canvas");
+                    var canvasPlot = document.getElementById("canvas");
+                    var ctx = canvasPlot.getContext("2d");
+                    canvas.width = window.innerWidth / 3;
+                    canvas.height = window.innerWidth / 3;
+                    var canvasPlotWidth = canvasPlot.clientWidth;
+                    var canvasPlotHeight = canvasPlot.clientHeight;
+                    var center = [canvasPlotWidth / 2, canvasPlotHeight / 2];
+                    var delenie = canvasPlotWidth / 20;
+					Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+                </script>
+                <script>
+                    var answer = 0;
+                    function proverit() {
+                        answer = 1;
+                        ctx.clearRect(0, 0, canvasPlotWidth, canvasPlotHeight);
+                        ctx.strokeStyle = "#ffffff";
+                        ctx.strokeRect(0, 0, canvasPlotWidth, canvasPlotHeight);
+                        canvasPlot = document.getElementById("canvas");
+                        ctx = canvasPlot.getContext("2d");
+                        canvas.width = window.innerWidth / 3;
+                        canvas.height = window.innerWidth / 3;
+                        canvasPlotWidth = canvasPlot.clientWidth;
+                        canvasPlotHeight = canvasPlot.clientHeight;
+                        center = [ window.innerWidth / 3 / 2, window.innerWidth / 3 / 2];
+                        delenie = window.innerWidth / 3 / 20;
+                        Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+
+                        answer_client = document.getElementsByClassName("gfd")[0].value; // Получение уравнения пользователя из <input> в виде строки.
+						if (answer_client != "") {
+							var yravnenie = answer_client.split(""); // Создание списка из строки, полученной ранее, где каждый элемент списка является отдельным символом, входящим в эту строку.
+
+							// Во всех комментариях в скрипте y, x, k и b употребляются в чисто математическом значении, они независят от содержания скрипта.
+
+							// Пример с конкретными значениями:
+							// pr_otv_zadachi_1 = 'y = -10x + 5'
+							// yravnenie = ['y', ' ', '=', ' ', '-', '1', '0', 'x', ' ', '+', ' ', '5']
+							// Определяем знак перед k: '-'; => знак перед k = -1.
+							// Делаем срез символов, нужных для записи |k|, и получаем их в виде: ['1', '0'].
+							// Соединяем символы в одну строку: '10'.
+							// Получаем |k|, путем изменения типа данных на Number: |k| = 10.
+							//
+							// Определяем знак перед b: '+'; => знак перед b = 1.
+							// Делаем срез символов, нужных для записи |b|, и получаем их в виде: ['5'].
+							// Соединяем символы в одну строку: '5'.
+							// Получаем |b|, путем изменения типа данных на Number: |b| = 5.
+
+							let koefficienti = []; // Создаем список, где будут индексы символов '=' (всегда будет) и 'x' (если будет). Зная, как расположены символы записи коэффициентов относительно полученных нами индексов мы будем это реализовывать.
+							for (let i = 0; i < yravnenie.length; i++) {
+								// i принимает все целые значения на промежутке [0; yravnenie.length - 1]. i будет использоваться как значение индекса, т.е. этот цикл пройдется по каждому элементу списка yravnenie.
+								if (yravnenie[i] == "=" || yravnenie[i] == "x") {
+									// Проверка, равен ли i-й элемент списка yravnenie нужным нам значениям.
+									koefficienti.push(i); // Добавление i в список koefficienti. При верности условия, i будет являться индексом нужого нам элемента из списка yravnenie.
+								}
+							}
+							// По итогу, мы получаем нужные нам индексы.
+
+							// В названиях переменных есть части, говорящие о их содержании, чтобы было легче ориентироваться в коде. Объясню их смысл:
+							// Применяется только к спискам! _string после основного названия переменной означает, что каждый элемент списка имеет строковый тип данных.
+							// _p - 'пользователя'.
+							// z - знак (т.е. переменная принимает только значния 1 (+) или -1 (-)).
+
+							var k_string = []; // Должен содержать срез коэффициента k из уравнения пользователя. Начальное значение не задано.
+							k_p = true; // Должен содержать |k| пользователя. Начальное значение задано '|' для корректности (т.к. '' (которое хотели задать) = 0, что в некоторых случаях будет причиной неправильного выполнения программы).
+							k_pz = true; // Должен содержать знак перед коэффициентом k пользователя (1 (+) или -1 (-)). Начальное значение задано '|' для корректности (т.к. '' (которое хотели задать) = 0, что в некоторых случаях будет причиной неправильного выполнения программы).
+							var b_string = []; // Должен содержать срез коэффициента b из уравнения пользователя. Начальное значение не задано.
+							b_p = true; // Должен содержать |b| пользователя. Начальное значение задано '|' для корректности (т.к. '' (которое хотели задать) = 0, что в некоторых случаях будет причиной неправильного выполнения программы).
+							b_pz = true; // Должен содержать знак перед коэффициентом b пользователя (1 (+) или -1 (-)). Начальное значение задано '|' для корректности (т.к. '' (которое хотели задать) = 0, что в некоторых случаях будет причиной неправильного выполнения программы).
+
+							// Напоминаю, что во всех комментариях в скрипте y, x, k и b употребляются в чисто математическом значении, они независят от содержания скрипта.
+
+							// Блок, определяющий коэффициенты в уравнении пользователя, исходя из полученных данных.
+							if (koefficienti.length != 1) {
+								// != (y = b)
+								if (yravnenie[koefficienti[0] + 2] != "-") {
+									// != (y = -kx + b)
+									k_pz = 1; // Очевидный вывод из верности условия.
+									if (koefficienti[0] + 2 != koefficienti[1]) {
+										// != (y = x + b)
+										k_string = yravnenie.slice(koefficienti[0] + 2, koefficienti[1]); // Срез коэффициента k (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+										k_p = Number(k_string.join("")); // Соединение цифр коэффициента k, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной k_p на Number.
+									}
+									else if (koefficienti[0] + 2 == koefficienti[1]) { // == (y = x + b)
+										k_p = 1; // Очевидный вывод из верности условия.
+									}
+								}
+								else if (yravnenie[koefficienti[0] + 2] == "-") { // == (y = -kx + b)
+									k_pz = -1; // Очевидный вывод из верности условия.
+									if (koefficienti[0] + 3 != koefficienti[1]) { // != (y = -x + b)
+										k_string = yravnenie.slice(koefficienti[0] + 3, koefficienti[1]); // Срез коэффициента k (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+										k_p = Number(k_string.join("")); // Соединение цифр коэффициента k, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной k_p на Number.
+									}
+									else if (koefficienti[0] + 3 == koefficienti[1]) {  // == (y = -x + b)
+										k_p = 1; // Очевидный вывод из верности условия.
+									}
+								}
+								if (koefficienti[1] != yravnenie.length - 1) { // != (y = kx)
+									b_string = yravnenie.slice(koefficienti[1] + 4); // Срез коэффициента b (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+									b_p = Number(b_string.join("")); // Соединение цифр коэффициента b, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной b_p на Number.
+									if (yravnenie[koefficienti[1] + 2] != "-") { // != (y = kx - b)
+										b_pz = 1; // Очевидный вывод из верности условия.
+									}
+									else if (yravnenie[koefficienti[1] + 2] == "-") { // == (y = kx - b)
+										b_pz = -1; // Очевидный вывод из верности условия.
+									}
+								}
+								else if (koefficienti[1] == yravnenie.length - 1) { // == (y = kx)
+									b_p = 0; // Очевидный вывод из верности условия.
+									b_pz = 1; // Очевидный вывод из верности условия.
+								}
+							} // Конец 'главного' if.
+							else if (koefficienti.length == 1) { // == (y = b)
+								k_p = 0; // Очевидный вывод из верности условия.
+								k_pz = 1; // Условно верно, что 0 != -0, поэтому знак перед k = 1.
+								if (yravnenie[koefficienti[0] + 2] != "-") { // != (y = -b)
+									b_pz = 1; // Очевидный вывод из верности условия.
+									b_string = yravnenie.slice(koefficienti[0] + 2); // Срез коэффициента b (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+									b_p = Number(b_string.join("")); // Соединение цифр коэффициента b, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной b_p на Number.
+								}
+								else if (yravnenie[koefficienti[0] + 2] == "-") { // == (y = -b)
+									b_pz = -1; // Очевидный вывод из верности условия.
+									b_string = yravnenie.slice(koefficienti[0] + 3); // Срез коэффициента b (представленного в виде списка с элементами строкового типа данных) из основного уравнения.
+									b_p = Number(b_string.join("")); // Соединение цифр коэффициента b, представленных в элементах списка в строкового типе данных, и изменение типа данных в переменной b_p на Number.
+								}
+							} // Конец 'главного' else if.
+							// Конец блока, определяющего коэффициенты в уравнении пользователя, исходя из полученных данных.
+
+							Draw_Straight_Standart_Form_Linear_Function(k_p, k_pz, b_p, b_pz, "#0bb7d5");
+						}
+                        if (k == "" && x != "") {
+                            k = 1;
+                        }
+						Draw_Straight_Standart_Form_Linear_Function(k, kz, b, bz, "#fb0303");
+						Draw_Point(center[0] + delenie * (((b * bz) / (k * kz)) * -1), center[1], "#fb0303");
+						Draw_Point(center[0], center[1] - delenie * (b * bz), "#fb0303");
+                        otv_uch_1 = document.getElementById("z_1").value;
+                        ball = 0;
+                        if (otv_uch_1 == pr_otv_zadachi_1t) {
+                            ball += 1;
+                        }
+                        if (ball == 1) {
+                            document.getElementById("rezultat").innerHTML = "Правильно";
+                        }
+						else {
+                            document.getElementById("rezultat").innerHTML = "Правильный ответ: " + pr_otv_zadachi_1t;
+                        }
+                    }
+                </script>
+                <script>
+                    window.addEventListener("resize", () => {
+						// canvas = document.getElementById("canvas");
+                        canvas.width = window.innerWidth / 3;
+                        canvas.height = window.innerWidth / 3;
+                        canvasPlotWidth = canvasPlot.clientWidth;
+                        canvasPlotHeight = canvasPlot.clientHeight;
+						center = [canvasPlotWidth / 2, canvasPlotHeight / 2];
+						delenie = canvasPlotWidth / 20;
+                        Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+                        if (answer == 1) {
+							if (answer_client != "") {
+							Draw_Straight_Standart_Form_Linear_Function(k_p, k_pz, b_p, b_pz, "#0bb7d5");
+							}
+							if (k == "" && x != "") {
+								k = 1;
+							}
+							Draw_Straight_Standart_Form_Linear_Function(k, kz, b, bz, "#fb0303");
+							Draw_Point(center[0] + delenie * (((b * bz) / (k * kz)) * -1), center[1], "#fb0303");
+							Draw_Point(center[0], center[1] - delenie * (b * bz), "#fb0303");
+                        }
+                    });
+                </script>
+                <p></p>
+				<a class="btn btn-primary" href="Общий вид уравнения прямой.html">
+					Далее
+				</a>
+            </div>
+        </div>
+    </body>
+</html>

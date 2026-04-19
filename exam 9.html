@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>
+			По двум точкам
+		</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
+			integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" 
+			crossorigin="anonymous">
+		</script>
+		<link href="style.css" rel="stylesheet"/>
+		<link href="nav-bar.css" rel="stylesheet"/>
+		<link href="exam.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<script src="Methods_for_drawing_geometric_objects.js"></script>
+		<script>
+			// Переменные для общего уравнения прямой
+			var A = parseInt(Math.random() * 10);
+			var B = parseInt(Math.random() * 10);
+			if  (A == 0 && B == 0) {
+				A = 1;
+			}
+			var C = parseInt(Math.random() * 10);
+			if (C == 0 && A == 1 && B == 0) {
+				C = 1;
+			}
+			// Знаки переменных общего уравнения
+			var Az = parseInt(Math.random() * 10);
+			if (Az < 5) {
+				Az = 1;
+			}
+			else {
+				Az = -1;
+			}
+			var Bz = parseInt(Math.random() * 10);
+			if (Bz < 5) {
+				Bz = 1;
+			}
+			else {
+				Bz = -1;
+			}
+			var Cz = parseInt(Math.random() * 10);
+			if (Cz < 5) {
+				Cz = 1;
+			}
+			else {
+				Cz = -1;
+			}
+		</script>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+								Вступление
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Линейная функция.html">
+                                Стандартный вид уравнения линейной функции
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Общий вид уравнения прямой.html">
+								Общий вид уравнения прямой
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="По точке и вектору.html">
+								По точке и вектору
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="В отрезках.html">
+								В отрезках
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link active" href="#">
+								По двум точкам
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Итоги.html">
+								Итоги
+							</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		<div class="row">
+			<div>
+				<a class="btn btn-primary" href="По двум точкам.html">
+					Вернуться к параграфу
+				</a>
+				<p class="fw-light">
+					Задача №14:
+				</p>
+				<p class="lead">
+					Дана прямая
+				</p>
+				<canvas id="canvas"></canvas>
+				<script>
+					const canvas = document.getElementById('canvas');
+					var canvasPlot = document.getElementById('canvas');
+					var ctx = canvasPlot.getContext('2d');
+					canvas.width = window.innerWidth / 3;
+					canvas.height = window.innerWidth / 3;
+					var canvasPlotWidth = canvasPlot.clientWidth;
+					var canvasPlotHeight = canvasPlot.clientHeight;
+					var center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+					var delenie = window.innerWidth / 3 / 20;          
+					Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+				</script>
+				<script>
+					Draw_Straight_General_View(A, Az, B, Bz, C, Cz, '#fb0303');
+				</script>
+				<p class="lead">
+					Можно ли задать ее с помощью уравнения по двум точкам? Если можно, то напишите Да, если же нельзя, то напишите Нет.
+				</p>
+				<p class="lead">
+					Пример ответа: Нет.
+				</p>
+				<p id="answer">
+					Ответ: <input type="text" id="z_1">
+				</p>
+				<div>
+					<button onclick="proverit();" id="check">Проверить</button>
+					<span id="rezultat"></span>
+				</div>
+				<script>
+					function proverit(){
+						pr_otv_zadachi_1 = 'Да';
+						if (A * B == 0) {
+							pr_otv_zadachi_1 = 'Нет';
+						}
+						otv_uch_1 = document.getElementById('z_1').value;
+						ball = 0;
+						if (otv_uch_1 == pr_otv_zadachi_1){
+							ball += 1;
+						}
+						if (ball == 1){
+							document.getElementById('rezultat').innerHTML = "Правильно";
+						}
+						else {
+							document.getElementById('rezultat').innerHTML = 'Правильный ответ: ' + pr_otv_zadachi_1;
+						}
+					}
+				</script>
+				<script>
+					window.addEventListener('resize', () => {
+						const canvas = document.getElementById('canvas');
+						canvas.width = window.innerWidth / 3;
+						canvas.height = window.innerWidth / 3;
+						canvasPlotWidth = canvasPlot.clientWidth;
+						canvasPlotHeight = canvasPlot.clientHeight;
+						center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+						delenie = window.innerWidth / 3 / 20;	
+						Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+						Draw_Straight_General_View(A, Az, B, Bz, C, Cz, '#fb0303');
+					})
+				</script>
+				<p></p>
+				<a class="btn btn-primary" href="Итоги.html">
+					Итоги
+				</a>
+			</div>
+		</div>
+	</body>
+</html>

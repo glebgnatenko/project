@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>
+			Уравнение квадратичной функции через координаты вершины
+		</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
+			integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" 
+			crossorigin="anonymous">
+		</script>
+		<link href="style.css" rel="stylesheet"/>
+		<link href="nav-bar.css" rel="stylesheet"/>
+		<link href="exam.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<script src="Methods_for_drawing_geometric_objects.js"></script>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="main.html">
+								Вступление
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="abs.html">
+                                Стандартный вид уравнения квадратичной функции
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link active" href="#">
+								Уравнение квадратичной функции через координаты вершины
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Итоги ко второй главе.html">
+								Итоги
+							</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		<div class="row">
+			<div>
+				<a class="btn btn-primary" href="Через координаты вершины.html">
+					Вернуться к параграфу
+				</a>
+				<p class="fw-light">
+					Задача:
+				</p>
+				<p class="lead">
+					Дана функция:
+				</p>
+				<span class="textw" id='quartic_standart'></span>
+				<script>
+					// Этот скрипт рисует квадратичную параболу, заданную квадратичной функцией вида: y = a(x - b) ^ 2 + c.
+					
+					a = parseInt(Math.random() * 10); // Это переменная, равная модулю коэффициента a.
+					if (a == 0) {
+						a = 1;
+					}
+					a_z = parseInt(Math.random() * 10); // Это переменная, показывающая, что a > 0 (a_z = 1) или a < 0 (a_z = -1). При a = 0, a_z = 1.
+					if (a_z < 5) {
+						a_z = 1;
+					}
+					else {
+						a_z = -1;
+					}
+
+					b = parseInt(Math.random() * 10); // Это переменная, равная модулю коэффициента b.
+					b_z = parseInt(Math.random() * 10); // Это переменная, показывающая, что b > 0 (b_z = 1) или b < 0 (b_z = -1). При b = 0, b_z = 1.
+					if (b_z < 5) {
+						b_z = 1;
+					}
+					else {
+						b_z = -1;
+					}
+
+					c = parseInt(Math.random() * 10); // Это переменная, равная модулю коэффициента c.
+					c_z = parseInt(Math.random() * 10); // Это переменная, показывающая, что c > 0 (c_z = 1) или c < 0 (c_z = -1). При c = 0, c_z = 1.
+					if (c_z < 5) {
+						c_z = 1;
+					}
+					else {
+						c_z = -1;
+					}
+					
+					// y = a(x + b/2a)^2 - (b^2/4a + c)
+					a_symvol = ''
+					if (a != 1) {
+						a_symvol = a * a_z;
+					}
+					else if (a == 1) {
+						if (a_z == -1) {
+							a_symvol = '-';
+						}
+					}
+				
+
+					b_znak = '';
+					if (b != 0) {
+						if (b_z == 1) {
+							b_znak = ' - ';
+						}
+						else if (b_z == -1 ) {
+							b_znak = ' + ';
+						}
+					}
+
+					c_znak = '';
+					if (c != 0) {
+						if (c_z == 1) {
+							c_znak = ' + '
+						}
+						else if (c_z == -1) {
+							c_znak = ' - '
+						}
+					}
+
+					// a_kk = ''
+					// if (a != 1) {
+					//     a_kk = a;
+					// }
+
+					x = 'x';
+					if (b != 0) {
+						x = '(x'
+					}
+					
+					b_kk = ''
+					if (b != 0) {
+						b_kk = b + ')';
+					}
+					
+					c_kk = ''
+					if (c != 0) {
+						c_kk = c;
+					}
+					quadratic_function = 'y = ' + a_symvol + x + b_znak + b_kk + "<sup>2</sup>" + c_znak + c_kk;
+					document.getElementById('quartic_standart').innerHTML = quadratic_function;
+				</script>	
+				<p class="lead">
+					Найдите ординату вершины параболы, заданной этим уравнением. Пример ответа: -3
+				</p>
+				<p id="answer">
+					Ответ: <input type="text" id="z_1" class="gfd">
+				</p>
+				<div>
+					<button onclick="proverit();" id="check">Проверить</button>
+					<span id="rezultat"></span>
+				</div>
+				<p class="lead" id="legend">
+					(На этом графике красным цветом будут нарисованы парабола, заданная в условии задачи, и ее точка пересечения с осью y. Если ваш ответ будет неправильный, то голубым цветом нарисуется заданная вами точка, чтобы вы смогли найти у вас ошибку. Если хотите получить новую задачу, то обновляйте страницу до тех пор, пока в условии не сменятся числа)
+				</p>
+				<div>
+					<canvas id="canvas"></canvas>
+				</div>
+				<script>
+					const canvas = document.getElementById('canvas');
+					var canvasPlot = document.getElementById('canvas');
+					var ctx = canvasPlot.getContext('2d');
+					canvas.width = window.innerWidth / 3;
+					canvas.height = window.innerWidth / 3;
+					var canvasPlotWidth = canvasPlot.clientWidth;
+					var canvasPlotHeight = canvasPlot.clientHeight;
+					var center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+					var delenie = window.innerWidth / 3 / 20;          
+					Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+				</script>
+				<script>
+					answer = 0
+					function proverit() {
+						answer = 1;
+						ctx.clearRect(0, 0, canvasPlotWidth, canvasPlotHeight);
+						ctx.strokeStyle = "#ffffff";
+						ctx.strokeRect(0, 0, canvasPlotWidth, canvasPlotHeight);
+						// const canvas = document.getElementById('canvas');
+						canvasPlot = document.getElementById('canvas');
+						ctx = canvasPlot.getContext('2d');
+						canvas.width = window.innerWidth / 3;
+						canvas.height = window.innerWidth / 3;
+						canvasPlotWidth = canvasPlot.clientWidth;
+						canvasPlotHeight = canvasPlot.clientHeight;
+						center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+						delenie = window.innerWidth / 3 / 20;          
+						Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+						answer_client = document.getElementsByClassName("gfd")[0].value;
+						Draw_Point(center[0] + b * b_z * delenie, center[1] - delenie * c * c_z, "#fb0303");
+						// Draw_Straight_Standart_Form_Linear_Function(k, kz, b, bz, "#fb0303");
+						ctx.beginPath();
+						ctx.lineWidth = delenie / 12;
+						ctx.strokeStyle = '#fb0303';
+						ctx.moveTo(center[0] - ((((center[1] / delenie - c * c_z * a_z) / a) ** 0.5 - b * b_z) * delenie), center[1] - a_z * center[1]);
+						ctx.quadraticCurveTo(center[0] + b * b_z * delenie, center[1] + a_z * center[1] - (2 * c * c_z) * delenie, center[0] + ((((center[1] / delenie - c * c_z * a_z) / a) ** 0.5 + b * b_z) * delenie), center[1] - a_z * center[1]);
+						ctx.stroke();
+						pr_otv_zadachi_1 = c * c_z;
+						if (answer_client == pr_otv_zadachi_1) {
+							document.getElementById('rezultat').innerHTML = "Правильно";
+						}
+						else {
+							document.getElementById('rezultat').innerHTML = 'Правильный ответ: ' + pr_otv_zadachi_1;
+						}
+					}
+				</script>
+				<script>
+					window.addEventListener('resize', () => {
+						// const canvas = document.getElementById('canvas');
+						canvas.width = window.innerWidth / 3;
+						canvas.height = window.innerWidth / 3;
+						canvasPlotWidth = canvasPlot.clientWidth;
+						canvasPlotHeight = canvasPlot.clientHeight;
+						center = [(window.innerWidth / 3) / 2, (window.innerWidth / 3) / 2];
+						delenie = window.innerWidth / 3 / 20;
+						Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+						if (answer == 1) {
+							Draw_Point(center[0] + b * b_z * delenie, center[1] - delenie * c * c_z, "#fb0303");
+							// Draw_Straight_Standart_Form_Linear_Function(k, kz, b, bz, "#fb0303");
+							ctx.beginPath();
+							ctx.lineWidth = delenie / 12;
+							ctx.strokeStyle = '#fb0303';
+							ctx.moveTo(center[0] - ((((center[1] / delenie - c * c_z * a_z) / a) ** 0.5 - b * b_z) * delenie), center[1] - a_z * center[1]);
+							ctx.quadraticCurveTo(center[0] + b * b_z * delenie, center[1] + a_z * center[1] - (2 * c * c_z) * delenie, center[0] + ((((center[1] / delenie - c * c_z * a_z) / a) ** 0.5 + b * b_z) * delenie), center[1] - a_z * center[1]);
+							ctx.stroke();
+						}
+					})
+				</script>
+				<p></p>
+				<a class="btn btn-primary" href="exam 15.html">Продолжить
+				</a>
+			</div>
+		</div>
+	</body>
+</html>

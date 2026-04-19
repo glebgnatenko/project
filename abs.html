@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>
+			Квадратичная функция
+		</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
+			integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" 
+			crossorigin="anonymous">
+		</script>
+		<link href="float.css" rel="stylesheet"/>
+		<link href="style.css" rel="stylesheet"/>
+		<link href="nav-bar.css" rel="stylesheet"/>
+		<style>
+			.inputs > span {
+				/* font-size: clamp(1px, 1.47vw, 2.5rem); */
+				font-size: 1.3vw;
+				width: 5vw;
+				max-width: 103px;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="Methods_for_drawing_geometric_objects.js"></script>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="main.html">
+								Вступление
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link active" href="#">
+                                Стандартный вид уравнения квадратичной функции
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Через координаты вершины.html">
+								Уравнение квадратичной функции через координаты вершины
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Итоги ко второй главе.html">
+								Итоги
+							</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+		<div class="row">
+			<div>
+				<canvas id="canvas"></canvas>
+				<p class="fw-light">
+					<b>y = ax<sup>2</sup> + bx + c</b>
+				</p>
+				<p class="lead">
+					Это <b>стандартный вид квадратичной функции</b>. Из-за того, что зависимость значения функции от значения аргумента не линейная, а <b>квадратичная</b>, то графиком этой функции является кривая, называемая <b>параболой</b>. Парабола состоит из двух <b>ветвей</b>. Старший коэффициент <b>a</b> определяет <b>направление</b> ветвей параболы: если a > 0, то ветви параболы направлены вверх (изображено на рисунке); если a < 0, то ветви параболы направлены вниз. Коэффициент <b>b</b> влияет на расположение <b>вершины параболы</b> (точки, где две ветви соединяются): вершина имеет <b>абсциссу</b>
+				</p>
+				<div class="container_float" style="padding-left: 30%;">
+					<div class="inputsw">
+						<!-- <span class="in" id="chislitel 1" style="border: none; outline: none; text-align: center; padding-bottom: 0.1em;font-size: 14vw;"></span> -->
+						<span class="in1" id="znamenatel 1" style="outline: none; text-align: center; font-size: 1.7vw;">x<sub>0</sub></span>
+					</div>
+					<div class="labels">
+						<p></p>
+						<label style="padding-left: 20px; padding-right: 20px;font-size: 1.1vw;">=</label>
+					</div>
+					<div class="inputs">
+						<span class="in2" id="chislitel 2" style="border: none; outline: none; text-align: center; padding-bottom: 0.1em;">-b</span>
+						<span class="in3" id="znamenatel 2" style="border: none;  border-top: 1px solid; outline: none; text-align: center;">2a</span>
+					</div>
+				</div>
+				<script>
+					const canvas = document.getElementById('canvas');
+					var canvasPlot = document.getElementById('canvas');
+					var ctx = canvasPlot.getContext('2d');
+					canvas.width = window.innerWidth / 3;
+					canvas.height = window.innerWidth / 3;
+					var canvasPlotWidth = canvasPlot.clientWidth;
+					var canvasPlotHeight = canvasPlot.clientHeight;
+					var center = [canvasPlotWidth / 2, canvasPlotHeight / 2];
+                    var delenie = canvasPlotWidth / 20;
+					Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+				</script>
+				<script>
+					// y = a(x + b/2a)^2 - (b^2/4a + c)
+					A_k = 1;
+					A_kz = 1;
+				
+					B_k = 0;
+					B_kz = 1;
+				
+					C_k = 0;
+					C_kz = 1;
+				
+					A_k_2 = A_k;
+					A_k_2z = A_kz;
+				
+					B_k_2 = -1 * ((B_k * B_kz) / (2 * A_k * A_kz));
+					B_k_2z = 1;
+					if (B_k_2 < 0) {
+						B_k_2z = -1;
+						B_k_2 *= B_k_2z;
+					}
+				
+					C_k_2 = -1 * ((B_k ** 2) / (4 * A_k * A_kz)) + C_k * C_kz;
+					C_k_2z = 1;
+					if (C_k_2 < 0) {
+						C_k_2z = -1;
+						C_k_2 *= C_k_2z;
+					}
+				
+					ctx.beginPath();
+					ctx.lineWidth = delenie / 12;
+					ctx.strokeStyle = '#fb0303';
+					ctx.moveTo(center[0] - ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 - B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+					ctx.quadraticCurveTo(center[0] + B_k_2 * B_k_2z * delenie, center[1] + A_k_2z * center[1] - (2 * C_k_2 * C_k_2z) * delenie, center[0] + ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 + B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+					ctx.stroke();
+				</script>
+				<!-- <script>
+					Draw_Straight_Standart_Form_Linear_Function(k, kz, b, bz, "#fb0303");
+				</script> -->
+				<script>
+					window.addEventListener('resize', () => {
+						const canvas = document.getElementById('canvas');
+						canvas.width = window.innerWidth / 3;
+						canvas.height = window.innerWidth / 3;
+						canvasPlotWidth = canvasPlot.clientWidth;
+						canvasPlotHeight = canvasPlot.clientHeight;
+						center = [canvasPlotWidth / 2, canvasPlotHeight / 2];
+                    	delenie = canvasPlotWidth / 20;
+						Draw_Coordinate_System(center[0], center[1], canvasPlotWidth, canvasPlotHeight, delenie, "#fc0202");
+						ctx.beginPath();
+						ctx.lineWidth = delenie / 12;
+						ctx.strokeStyle = '#fb0303';
+						ctx.moveTo(center[0] - ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 - B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+						ctx.quadraticCurveTo(center[0] + B_k_2 * B_k_2z * delenie, center[1] + A_k_2z * center[1] - (2 * C_k_2 * C_k_2z) * delenie, center[0] + ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 + B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+						ctx.stroke();
+					})
+				</script>
+				<p class="lead">
+					Коэффициент <b>c</b> поднимает или опускает график на c делений по <b>оси ординат</b>: если  c > 0, то график будет поднят; если c < 0, то график будет опущен. Также коэффициент c равен ординате точки пересечения параболы с осью y.
+				</p>
+				<!-- <p class="lead">График параболы используется в физике. Например, траекторией тела, брошенного под углом к горизонту, будет именно парабола. Значимость квадратичных уравнений для физики еще болле очевидна. Например, координата тела, движущегося равноускоренно и прямолинейно,  на определенной оси находиться по формуле, которая есть квадратное уравнение относительно t (времени), где старший коэффициент a есть половина ускорения, b есть скорость тела, а c равно начальной координате тела.</p> -->
+				 <p class="lead">Абсциссы точек пересечения параболы с осью x равны корням уравнения ax<sup>2</sup> + bx + c = 0. По значению дискриминанта <b>D = b<sup>2</sup> - 4ac</b> можно определить количество этих точек: при D < 0 таких точек не будет, при D = 0 будет одна такая точка, а при D > 0 будет две такие точки.</p>
+				<a class="btn btn-primary" href="exam 10.html">Перейти к практике</a>
+			</div>
+		</div>
+	</body>
+</html>
+
+<!-- <script>
+	// y = a(x + b/2a)^2 - (b^2/4a + c)
+	A_k = 1;
+	A_kz = 1;
+
+	B_k = 1;
+	B_kz = -1;
+
+	C_k = 1;
+	C_kz = -1;
+
+	A_k_2 = A_k;
+	A_k_2z = A_kz;
+
+	B_k_2 = -1 * ((B_k * B_kz) / (2 * A_k * A_kz));
+	B_k_2z = 1;
+	if (B_k_2 < 0) {
+		B_k_2z = -1;
+		B_k_2 *= B_k_2z;
+	}
+
+	C_k_2 = -1 * ((B_k ** 2) / (4 * A_k * A_kz)) + C_k * C_kz;
+	C_k_2z = 1;
+	if (C_k_2 < 0) {
+		C_k_2z = -1;
+		C_k_2 *= C_k_2z;
+	}
+
+	ctx.beginPath();
+	ctx.lineWidth = 3;
+	ctx.strokeStyle = '#fb0303';
+	ctx.moveTo(center[0] - ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 - B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+	ctx.quadraticCurveTo(center[0] + B_k_2 * B_k_2z * delenie, center[1] + A_k_2z * center[1] - (2 * C_k_2 * C_k_2z) * delenie, center[0] + ((((center[1] / delenie - C_k_2 * C_k_2z * A_k_2z) / A_k_2) ** 0.5 + B_k_2 * B_k_2z) * delenie), center[1] - A_k_2z * center[1]);
+	ctx.stroke();
+</script> -->
